@@ -7,11 +7,20 @@ const User = new Schema({
 })
 
 const Exercise = new Schema({
-    _id: {type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    username: String,
     description: String,
     duration: Number,
     date: Date,
+    _id: String
 })
+
+// IF THE SCHEMAS WERE RELATED
+// const Exercise = new Schema({
+//     _id: {type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+//     description: String,
+//     duration: Number,
+//     date: Date,
+// })
 
 // const Log = new Schema({
 //     username: String,
