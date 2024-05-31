@@ -18,11 +18,11 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/views/index.html')
 });
 
-app.post('/api/users', (req, res)=> {
-  const username = req.body.username;
+app.post('/api/users', async (req, res)=> {
   try {
-    user.create({username: username});
-    res.json({"New User": username})
+    const newUser = new user({username: req.body.username});
+    const savedUser = await newUser.save();
+    res.json(savedUser);
   } catch (error) {
     res.json({"error" : "user not created!"});
   }
