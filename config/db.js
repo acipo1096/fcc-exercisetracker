@@ -7,12 +7,12 @@ const User = new Schema({
     _id: ObjectId
 })
 
-// const Exercise = new Schema({
-//     username: String,
-//     description: String,
-//     duration: Number,
-//     date: Date,
-// })
+const Exercise = new Schema({
+    _id: {type: ObjectId, ref: 'User' },
+    description: String,
+    duration: Number,
+    date: Date,
+})
 
 // const Log = new Schema({
 //     username: String,
@@ -38,5 +38,7 @@ const connectDB = async () => {
 
 
 const user = mongoose.model("User", User, "exercisetracker");
+const exercise = mongoose.model("Exercise", Exercise, "exercisetracker");
+
 
 module.exports = { connectDB , user }
