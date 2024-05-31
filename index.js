@@ -28,6 +28,11 @@ app.post('/api/users', async (req, res)=> {
   }
 })
 
+app.get('/api/users', async (req,res) => {
+  const users = await user.find();
+  res.json(users);
+})
+
 
 
 
