@@ -4,11 +4,10 @@ const Schema = mongoose.Schema;
 
 const User = new Schema({
     username: String,
-    // _id: ObjectId
 })
 
 const Exercise = new Schema({
-    _id: {type: ObjectId, ref: 'User' },
+    _id: {type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     description: String,
     duration: Number,
     date: Date,

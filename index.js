@@ -18,6 +18,7 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/views/index.html')
 });
 
+// Create new user
 app.post('/api/users', async (req, res)=> {
   try {
     const newUser = new user({username: req.body.username});
@@ -28,9 +29,33 @@ app.post('/api/users', async (req, res)=> {
   }
 })
 
+// Get all users
 app.get('/api/users', async (req,res) => {
   const users = await user.find();
   res.json(users);
+})
+
+// New exercise entry
+app.post('/api/users/:_id/exercises', async (req, res) => {
+  console.log(req.body[':_id']);
+
+  const getUser = await user.findById(req.body[':_id']);
+  console.log(getUser)
+
+  let date = new Date().toDateString();
+  if (req.body.date) {
+    date = req.body.date;
+  }
+  const newExercise = new exercise({
+    username: getUser.username,
+    description: req.body.description,
+    duration: req.body.duration,
+    date: date,
+    _id: getUser._id
+  })
+  console.log(newExercise)
+  const savedExercise = await newExercise.save();
+  res.json(savedExercise);
 })
 
 
