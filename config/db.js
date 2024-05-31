@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const User = new Schema({
     username: String,
-    _id: ObjectId
+    // _id: ObjectId
 })
 
 const Exercise = new Schema({
@@ -41,4 +41,4 @@ const user = mongoose.model("User", User, "exercisetracker");
 const exercise = mongoose.model("Exercise", Exercise, "exercisetracker");
 
 
-module.exports = { connectDB , user }
+module.exports = { connectDB , user, exercise }
