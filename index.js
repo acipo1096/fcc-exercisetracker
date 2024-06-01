@@ -37,25 +37,21 @@ app.get('/api/users', async (req,res) => {
 
 // New exercise entry
 app.post('/api/users/:_id/exercises', async (req, res) => {
-  console.log(req.body[':_id']);
-
   const getUser = await user.findById(req.body[':_id']);
-  console.log(getUser)
-
   let date = new Date().toDateString();
   if (req.body.date) {
     date = req.body.date;
   }
-  const newExercise = new exercise({
+  const newExercise = await exercise.create({
     username: getUser.username,
     description: req.body.description,
     duration: req.body.duration,
     date: date,
-    _id: req.body[':_id']
-  })
+    user_id: req.body[':_id']
+  }) 
   console.log(newExercise)
   const savedExercise = await newExercise.save();
-  res.json(savedExercise);
+  res.json(newExercise);
 })
 
 
