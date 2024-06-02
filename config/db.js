@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 
 const User = new Schema({
     username: String,
+    count: Number,
 })
 
 const Exercise = new Schema({

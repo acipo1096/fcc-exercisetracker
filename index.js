@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 // Create new user
 app.post('/api/users', async (req, res)=> {
   try {
-    const newUser = new user({username: req.body.username});
+    const newUser = new user({ username: req.body.username });
     const savedUser = await newUser.save();
     res.json(savedUser);
   } catch (error) {
