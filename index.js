@@ -49,7 +49,7 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
   }) 
   console.log(newExercise)
   const savedExercise = await newExercise.save();
-  res.json(newExercise);
+  res.json({username: getUser.username, savedExercise});
 })
 
 
