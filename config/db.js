@@ -12,7 +12,6 @@ const Exercise = new Schema({
     description: String,
     duration: Number,
     date: Date,
-    user_id: String
     // id: {type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 })
 
