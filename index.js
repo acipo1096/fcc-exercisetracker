@@ -3,7 +3,7 @@ const app = express()
 const cors = require('cors')
 const bodyParser = require('body-parser')
 require('dotenv').config()
-const { connectDB, user, exercise } = require('./config/db') 
+const { connectDB, user } = require('./config/db') 
 
 connectDB();
 
@@ -23,8 +23,10 @@ app.post('/api/users', async (req, res)=> {
   try {
     const newUser = new user({ username: req.body.username });
     const savedUser = await newUser.save();
+    console.log(savedUser)
     res.json(savedUser);
   } catch (error) {
+    console.log(error)
     res.json({"error" : "user not created!"});
   }
 })
@@ -53,6 +55,9 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
   const savedExercise = await newExercise.save();
   res.json(savedExercise);
 })
+
+// THIS is how the res.json for exercise should look:
+// {"_id":"61204ee8f5860e05a3652f0e","username":"fcc_test_16295073006","date":"Mon Jun 03 2024","duration":200,"description":"Basketball"}
 
 // Passes FCC post test
 // New exercise entry
