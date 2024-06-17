@@ -54,7 +54,7 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
   }) 
   console.log(newExercise)
   const savedExercise = await newExercise.save();
-  res.json(savedExercise);
+  res.json({username: getUser.username, savedExercise, id: getUser._id });
 })
 
 // THIS is how the res.json for exercise should look:
