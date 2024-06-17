@@ -51,11 +51,12 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
     date = formDate;
   }
 
-
   const newExercise = await exercise.create({
+    user: getUser.username,
     description: req.body.description,
     duration: req.body.duration,
     date: date,
+    _id: getUser._id,
   }) 
 
   console.log(newExercise)
