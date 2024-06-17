@@ -39,7 +39,8 @@ app.get('/api/users', async (req,res) => {
 
 // New exercise entry
 app.post('/api/users/:_id/exercises', async (req, res) => {
-  const getUser = await user.findById(req.params[':_id']);
+  const getUser = await user.findById(req.body[':_id']);
+  console.log(getUser)
   let date = new Date().toDateString();
   if (req.body.date) {
     date = req.body.date;

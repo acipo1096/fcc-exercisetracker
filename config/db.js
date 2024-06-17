@@ -7,11 +7,9 @@ const User = new Schema({
 })
 
 const Exercise = new Schema({
-    username: String,
     description: String,
     duration: Number,
     date: Date,
-    _id: String
 })
 
 // IF THE SCHEMAS WERE RELATED
