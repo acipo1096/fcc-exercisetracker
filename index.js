@@ -52,21 +52,19 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
   }
 
   const newExercise = await exercise.create({
-    user: getUser.username,
     description: req.body.description,
     duration: req.body.duration,
     date: date,
-    _id: getUser._id,
   }) 
 
   console.log(newExercise)
   const savedExercise = await newExercise.save();
   res.json({
-    user: getUser.username,
-    description: savedExercise.description,
-    duration: savedExercise.duration,
     _id: getUser._id,
-    date: savedExercise.date
+    user: getUser.username,
+    date: savedExercise.date,
+    duration: savedExercise.duration,
+    description: savedExercise.description
   });
 })
 
