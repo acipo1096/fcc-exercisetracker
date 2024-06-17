@@ -42,20 +42,15 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
   const getID = req.params._id;
   const getUser = await user.findById(getID);
 
-
-  console.log(getUser)
   let date = new Date().toDateString()
 
-  console.log(date)
-
   if (req.body.date) {
-    console.log(req.body.date)
     let formDate = new Date(req.body.date).toDateString();
     date = formDate;
   }
 
   const newExercise = await exercise.create({
-    user_id: getUser._id,
+    id: getUser._id,
     description: req.body.description,
     duration: req.body.duration,
     date: date,
@@ -65,10 +60,10 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
   const savedExercise = await newExercise.save();
   res.json({
     _id: getUser._id,
-    user: getUser.username,
-    date: savedExercise.date,
+    username: getUser.username,
+    description: savedExercise.description,
     duration: savedExercise.duration,
-    description: savedExercise.description
+    date: savedExercise.date
   });
 })
 

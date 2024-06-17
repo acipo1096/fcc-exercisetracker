@@ -7,7 +7,7 @@ const User = new Schema({
 })
 
 const Exercise = new Schema({
-    user_id: {type: String, required: true},
+    id: {type: String, required: true},
     description: String,
     duration: Number,
     date: String,
