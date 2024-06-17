@@ -11,7 +11,7 @@ const Exercise = new Schema({
     description: String,
     duration: Number,
     date: Date,
-    id: {type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+    _id: String
 })
 
 // IF THE SCHEMAS WERE RELATED
