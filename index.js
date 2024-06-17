@@ -39,7 +39,10 @@ app.get('/api/users', async (req,res) => {
 
 // New exercise entry
 app.post('/api/users/:_id/exercises', async (req, res) => {
-  const getUser = await user.findById(req.body[':_id']);
+  const getID = req.params._id;
+  const getUser = await user.findById(getID);
+
+
   console.log(getUser)
   let date = new Date().toDateString()
 
@@ -52,6 +55,7 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
   }
 
   const newExercise = await exercise.create({
+    user_id: getUser._id,
     description: req.body.description,
     duration: req.body.duration,
     date: date,
