@@ -39,9 +39,7 @@ app.get('/api/users', async (req,res) => {
 
 // New exercise entry
 app.post('/api/users/:_id/exercises', async (req, res) => {
-  const getUser = await user.findById(req.body[':_id']);
-  console.log(typeof getUser)
-  console.log(getUser.username)
+  const getUser = await user.findById(req.params[':_id']);
   let date = new Date().toDateString();
   if (req.body.date) {
     date = req.body.date;
@@ -54,7 +52,13 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
   }) 
   console.log(newExercise)
   const savedExercise = await newExercise.save();
-  res.json(savedExercise);
+  res.json({
+    user: getUser.username,
+    description: savedExercise.description,
+    duration: savedExercise.duration,
+    date: savedExercise.date,
+    _id: getUser._id
+  });
 })
 
 // THIS is how the res.json for exercise should look:
