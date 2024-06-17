@@ -46,10 +46,11 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
     date = req.body.date;
   }
   const newExercise = await exercise.create({
-    username: getUser.username,
+    // username: getUser.username,
     description: req.body.description,
     duration: req.body.duration,
     date: date,
+    // id: getUser._id
   }) 
   console.log(newExercise)
   const savedExercise = await newExercise.save();
