@@ -45,8 +45,8 @@ const connectDB = async () => {
 }
 
 
-const user = mongoose.model("User", User, "exercisetracker");
-const exercise = mongoose.model("Exercise", Exercise, "exercisetracker");
+const user = mongoose.model("User", User, "user");
+const exercise = mongoose.model("Exercise", Exercise, "exercise");
 
 
 module.exports = { connectDB , user, exercise }
