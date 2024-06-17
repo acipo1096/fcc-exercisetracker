@@ -3,7 +3,7 @@ const app = express()
 const cors = require('cors')
 const bodyParser = require('body-parser')
 require('dotenv').config()
-const { connectDB, user } = require('./config/db') 
+const { connectDB, user, exercise } = require('./config/db') 
 
 connectDB();
 
