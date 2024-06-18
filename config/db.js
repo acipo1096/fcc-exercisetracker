@@ -13,24 +13,10 @@ const Exercise = new Schema({
     date: String,
 })
 
-// IF THE SCHEMAS WERE RELATED
-// const Exercise = new Schema({
-//     _id: {type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-//     description: String,
-//     duration: Number,
-//     date: Date,
-// })
-
-// const Log = new Schema({
-//     username: String,
-//     count: Number,
-//     _id: "5fb5853f734231456ccb3b05",
-//     log: [{
-//       description: "test",
-//       duration: 60,
-//       date: "Mon Jan 01 1990",
-//     }]
-// })
+const Log = new Schema({
+    id: {type: String, required: true},
+    count: Number
+})
 
 const connectDB = async () => {
     try {
@@ -46,6 +32,7 @@ const connectDB = async () => {
 
 const user = mongoose.model("User", User, "user");
 const exercise = mongoose.model("Exercise", Exercise, "exercise");
+const log = mongoose.model("Log", Log, "exercise")
 
 
 module.exports = { connectDB , user, exercise }
