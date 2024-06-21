@@ -72,9 +72,8 @@ app.get('/api/users/:_id/logs', async (req, res) => {
   const exerciseMap = exercises.map((indExercise) => ({
       description: indExercise.description,
       duration: indExercise.duration,
-      date: indExercise.date
+      date: new Date(indExercise.date).toDateString()
   }));
-
 
   res.json({
     username: getUser.username,
