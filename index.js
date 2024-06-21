@@ -67,6 +67,23 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
 })
 
 app.get('/api/users/:_id/logs', async (req, res) => {
+  const { from, to, limit } = req.query;
+
+  let dateObj = {};
+  let filter = {user_id: id}
+
+  if (from) {
+    dateObj["$gte"] = new Date(from);
+  }
+
+  if (to) {
+    dateObj["$lte"] = new Date(to);
+  }
+
+  if (from || to) {
+    filter.date = dateObj;
+  }
+
   const getUser = await user.findById(req.params._id);
   const exercises = await exercise.find({id: req.params._id})
   const log = exercises.map((indExercise) => ({
