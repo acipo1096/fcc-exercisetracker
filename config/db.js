@@ -15,7 +15,8 @@ const Exercise = new Schema({
 
 const Log = new Schema({
     id: {type: String, required: true},
-    count: Number
+    count: Number,
+    log: {type: Array, }
 })
 
 const connectDB = async () => {
