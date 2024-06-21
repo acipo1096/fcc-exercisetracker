@@ -80,7 +80,7 @@ app.get('/api/users/:_id/logs', async (req, res) => {
     username: getUser.username,
     count: exercises.length,
     _id: getUser._id,
-    log: [exerciseMap]
+    log: exerciseMap
   })
 })
 
