@@ -67,6 +67,8 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
 })
 
 app.get('/api/users/:_id/logs', async (req, res) => {
+  const getUser = await user.findById(req.params._id);
+  console.log(getUser)
 
 })
 

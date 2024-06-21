@@ -35,4 +35,4 @@ const exercise = mongoose.model("Exercise", Exercise, "exercise");
 const log = mongoose.model("Log", Log, "exercise")
 
 
-module.exports = { connectDB , user, exercise }
+module.exports = { connectDB , user, exercise, log }
