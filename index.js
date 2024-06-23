@@ -94,7 +94,7 @@ app.get('/api/users/:_id/logs', async (req, res) => {
 
   console.log(query.date)
   
-  const exercises = await exercise.find(query)
+  const exercises = await exercise.find(query).limit(limit);
 
   const log = exercises.map((indExercise) => ({
       description: indExercise.description,
