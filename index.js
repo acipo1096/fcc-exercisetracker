@@ -42,12 +42,14 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
   const getID = req.params._id;
   const getUser = await user.findById(getID);
 
-  let date = new Date().toDateString()
+  let date = new Date()
 
   if (req.body.date) {
-    let formDate = new Date(req.body.date).toDateString();
+    let formDate = new Date(req.body.date);
     date = formDate;
   }
+
+  console.log(typeof date)
 
   const newExercise = await exercise.create({
     id: getUser._id,
@@ -62,7 +64,7 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
     username: getUser.username,
     description: savedExercise.description,
     duration: savedExercise.duration,
-    date: savedExercise.date
+    date: savedExercise.date.toDateString()
   });
 })
 
@@ -75,13 +77,13 @@ app.get('/api/users/:_id/logs', async (req, res) => {
 
   // When building queries, you start with a query object
   let query = { id: req.params._id}
-  console.log(query)
 
 
   // query.date will refer to the date key in the DB
   // I STILL DON'T GET HOW THE QUERY INTERACTS WITH MONGO SYNTAX
   if (from) {
     query.date = { $gte: new Date(from) }
+    console.log(query.date)
   }
 
   if (to) {
@@ -91,18 +93,14 @@ app.get('/api/users/:_id/logs', async (req, res) => {
   if (from && to ) {
     query.date = { $gte: new Date(from), $lte : new Date(to) }
   }
-
-  console.log(query.date)
   
   const exercises = await exercise.find(query).limit(limit);
 
   const log = exercises.map((indExercise) => ({
       description: indExercise.description,
       duration: indExercise.duration,
-      date: indExercise.date
+      date: indExercise.date.toDateString()
   }));
-
-  console.log(log)
 
   res.json({
     username: getUser.username,

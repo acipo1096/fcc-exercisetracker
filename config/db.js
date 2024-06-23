@@ -10,7 +10,7 @@ const Exercise = new Schema({
     id: {type: String, required: true},
     description: String,
     duration: Number,
-    date: String,
+    date: Date,
 })
 
 const Log = new Schema({
