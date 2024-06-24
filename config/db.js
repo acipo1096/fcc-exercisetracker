@@ -13,12 +13,6 @@ const Exercise = new Schema({
     date: Date,
 })
 
-const Log = new Schema({
-    id: {type: String, required: true},
-    count: Number,
-    log: {type: Array, }
-})
-
 const connectDB = async () => {
     try {
         const conn = await mongoose.connect(process.env.MONGO_URI, {dbName: 'exercisetracker'});
@@ -33,7 +27,5 @@ const connectDB = async () => {
 
 const user = mongoose.model("User", User, "user");
 const exercise = mongoose.model("Exercise", Exercise, "exercise");
-const log = mongoose.model("Log", Log, "exercise")
 
-
-module.exports = { connectDB , user, exercise, log }
+module.exports = { connectDB , user, exercise }

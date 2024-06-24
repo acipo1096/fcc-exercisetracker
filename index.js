@@ -3,7 +3,7 @@ const app = express()
 const cors = require('cors')
 const bodyParser = require('body-parser')
 require('dotenv').config()
-const { connectDB, user, exercise, log } = require('./config/db') 
+const { connectDB, user, exercise } = require('./config/db') 
 
 connectDB();
 
@@ -49,23 +49,26 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
     date = formDate;
   }
 
-  console.log(typeof date)
-
-  const newExercise = await exercise.create({
-    id: getUser._id,
-    description: req.body.description,
-    duration: req.body.duration,
-    date: date,
-  }) 
-
-  const savedExercise = await newExercise.save();
-  res.json({
-    _id: getUser._id,
-    username: getUser.username,
-    description: savedExercise.description,
-    duration: savedExercise.duration,
-    date: savedExercise.date.toDateString()
-  });
+  try {
+    const newExercise = await exercise.create({
+      id: getUser._id,
+      description: req.body.description,
+      duration: req.body.duration,
+      date: date,
+    }) 
+  
+    const savedExercise = await newExercise.save();
+    res.json({
+      _id: getUser._id,
+      username: getUser.username,
+      description: savedExercise.description,
+      duration: savedExercise.duration,
+      date: savedExercise.date.toDateString()
+    });
+  } catch (error) {
+    res.send("Error!")
+  }
+  
 })
 
 app.get('/api/users/:_id/logs', async (req, res) => {
@@ -80,7 +83,9 @@ app.get('/api/users/:_id/logs', async (req, res) => {
 
 
   // query.date will refer to the date key in the DB
-  // I STILL DON'T GET HOW THE QUERY INTERACTS WITH MONGO SYNTAX
+  // in order for this to work, you have to store the date as a Date object in mongo 
+  // however, to pass the tests, return the json as a date string
+
   if (from) {
     query.date = { $gte: new Date(from) }
     console.log(query.date)
@@ -96,7 +101,7 @@ app.get('/api/users/:_id/logs', async (req, res) => {
   
   const exercises = await exercise.find(query).limit(limit);
 
-  const log = exercises.map((indExercise) => ({
+  const exerciseMap = exercises.map((indExercise) => ({
       description: indExercise.description,
       duration: indExercise.duration,
       date: indExercise.date.toDateString()
@@ -106,7 +111,7 @@ app.get('/api/users/:_id/logs', async (req, res) => {
     username: getUser.username,
     count: exercises.length,
     _id: getUser._id,
-    log
+    log: exerciseMap
   })
 })
 
